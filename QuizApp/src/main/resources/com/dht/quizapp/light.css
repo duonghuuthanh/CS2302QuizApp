@@ -3,12 +3,12 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to c
 Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to edit this template
 */
 /* 
-    Created on : Jun 17, 2025, 8:05:20 AM
+    Created on : Jun 24, 2025, 8:30:46 AM
     Author     : admin
 */
 
 .Main {
-    -fx-background-color: lightblue;
+    -fx-background-color: #FFFFFF;
     -fx-padding: 10;
     -fx-alignment: CENTER;
     -fx-spacing: 10;
@@ -17,14 +17,14 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
 .Subject {
     -fx-font-size: 40;
     -fx-font-weight: bold;
-    -fx-fill: red;
+    -fx-fill: #000000;
     -fx-stroke: gold;
     -fx-stroke-width: 3;
 }
 
 .Button {
-    -fx-background-color: darkblue;
-    -fx-text-fill: white;
+    -fx-background-color: #E0E0E0;
+    -fx-text-fill: #000000;
     -fx-pref-width: 200;
     -fx-padding: 5;
     -fx-font-size: 16;
