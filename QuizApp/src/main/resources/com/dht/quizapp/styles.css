@@ -14,6 +14,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
     -fx-spacing: 8;
 }
 
+.Space {
+    -fx-spacing: 8;
+}
+
 .Subject {
     -fx-font-size: 40;
     -fx-font-weight: bold;
@@ -40,10 +44,17 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
     -fx-padding: 8;
 }
 
+.Normal {
+    -fx-fill: black;
+    -fx-font-size: 16;
+}
+
 .Correct {
-    -fx-text-fill: blue;
+    -fx-fill: blue;
+    -fx-font-size: 16;
 }
 
 .Wrong {
-    -fx-text-fill: red;
+    -fx-fill: red;
+    -fx-font-size: 16;
 }

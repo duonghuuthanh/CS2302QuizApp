@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="594.0" styleClass="Main" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dht.quizapp.PracticeController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="594.0" styleClass="Main" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dht.quizapp.PracticeController">
    <children>
       <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Subject" text="LUYỆN TẬP" />
       <HBox prefHeight="45.0" prefWidth="574.0" styleClass="Main">
@@ -15,8 +15,9 @@
             <Button mnemonicParsing="false" onAction="#start" text="Bắt đầu" />
          </children>
       </HBox>
-      <Text fx:id="txtContent" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-      <VBox fx:id="vboxChoices" prefHeight="130.0" prefWidth="574.0" />
+      <Text fx:id="txtContent" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Normal" text="..." />
+      <VBox fx:id="vboxChoices" prefHeight="130.0" prefWidth="574.0" styleClass="Main" />
+      <Text fx:id="txtResult" strokeType="OUTSIDE" strokeWidth="0.0" />
       <HBox prefHeight="51.0" prefWidth="574.0" styleClass="Main">
          <children>
             <Button mnemonicParsing="false" onAction="#check" text="Check" />
