@@ -11,7 +11,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
     -fx-background-color: lightblue;
     -fx-padding: 10;
     -fx-alignment: CENTER;
-    -fx-spacing: 10;
+    -fx-spacing: 8;
 }
 
 .Subject {
@@ -34,4 +34,16 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
 .Input {
     -fx-pref-width: 300;
     -fx-padding: 8;
+}
+
+.Padding {
+    -fx-padding: 8;
+}
+
+.Correct {
+    -fx-text-fill: blue;
+}
+
+.Wrong {
+    -fx-text-fill: red;
 }

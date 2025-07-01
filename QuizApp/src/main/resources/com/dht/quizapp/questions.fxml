@@ -3,6 +3,8 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
@@ -10,36 +12,44 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="570.0" prefWidth="493.0" styleClass="Main" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dht.quizapp.QuestionsController">
-   <children>
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Subject" text="QUẢN LÝ CÂU HỎI" />
-      <TextArea fx:id="txtContent" prefHeight="80.0" prefWidth="580.0" promptText="Nội dung câu hỏi." />
-      <HBox prefHeight="29.0" prefWidth="580.0" styleClass="Main">
+
+<ScrollPane stylesheets="@styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dht.quizapp.QuestionsController">
+   <content>
+      <VBox styleClass="Main">
          <children>
-            <ComboBox fx:id="cbCates" prefWidth="150.0" promptText="Danh mục" styleClass="Input" />
-            <ComboBox fx:id="cbLevels" prefWidth="150.0" promptText="Mức độ" styleClass="Input" />
-         </children>
-      </HBox>
-      <VBox fx:id="vboxChoices" prefHeight="81.0" prefWidth="580.0">
-         <children>
-            <HBox prefHeight="0.0" prefWidth="580.0" styleClass="Main">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Subject" text="QUẢN LÝ CÂU HỎI" />
+            <TextArea fx:id="txtContent" prefHeight="57.0" prefWidth="473.0" promptText="Nội dung câu hỏi." />
+            <HBox prefHeight="29.0" prefWidth="580.0" styleClass="Main">
                <children>
-                  <RadioButton mnemonicParsing="false">
-                     <toggleGroup>
-                        <ToggleGroup fx:id="toggleChoice" />
-                     </toggleGroup></RadioButton>
-                  <TextField styleClass="Input" />
+                  <ComboBox fx:id="cbCates" prefWidth="150.0" promptText="Danh mục" styleClass="Input" />
+                  <ComboBox fx:id="cbLevels" prefWidth="150.0" promptText="Mức độ" styleClass="Input" />
                </children>
             </HBox>
-            <HBox layoutX="10.0" layoutY="10.0" prefHeight="18.0" prefWidth="580.0" styleClass="Main">
+            <VBox fx:id="vboxChoices" prefHeight="81.0" prefWidth="580.0">
                <children>
-                  <RadioButton mnemonicParsing="false" toggleGroup="$toggleChoice" />
-                  <TextField styleClass="Input" />
+                  <HBox prefHeight="0.0" prefWidth="580.0" styleClass="Main">
+                     <children>
+                        <RadioButton mnemonicParsing="false">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="toggleChoice" />
+                           </toggleGroup>
+                        </RadioButton>
+                        <TextField styleClass="Input" />
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="10.0" prefHeight="18.0" prefWidth="580.0" styleClass="Main">
+                     <children>
+                        <RadioButton mnemonicParsing="false" toggleGroup="$toggleChoice" />
+                        <TextField styleClass="Input" />
+                     </children>
+                  </HBox>
                </children>
-            </HBox>
+            </VBox>
+            <Button mnemonicParsing="false" onAction="#handleMoreChoice" styleClass="Button" text="Thêm lựa chọn" />
+            <Button mnemonicParsing="false" onAction="#handleQuestion" style="-fx-background-color: red;" styleClass="Button" text="Thêm câu hỏi" />
+            <TextField fx:id="txtSearch" promptText="Tìm kiếm..." styleClass="Input" />
+            <TableView fx:id="tbQuestions" prefHeight="162.0" prefWidth="580.0" />
          </children>
       </VBox>
-      <Button mnemonicParsing="false" onAction="#handleMoreChoice" styleClass="Button" text="Thêm lựa chọn" />
-      <Button mnemonicParsing="false" onAction="#handleQuestion" styleClass="Button" text="Thêm câu hỏi" />
-   </children>
-</VBox>
+   </content>
+</ScrollPane>

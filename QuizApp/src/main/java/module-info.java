@@ -7,4 +7,5 @@ module com.dht.quizapp {
 
     opens com.dht.quizapp to javafx.fxml;
     exports com.dht.quizapp;
+    exports com.dht.pojo;
 }

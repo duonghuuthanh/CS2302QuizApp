@@ -4,7 +4,9 @@
  */
 package com.dht.utils;
 
+import java.util.Optional;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 
 /**
  *
@@ -15,7 +17,8 @@ public class MyAlert {
     private final Alert alert;
     
     private MyAlert() {
-        alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Quiz App");
         alert.setHeaderText("Quiz App");
     }
     
@@ -29,5 +32,11 @@ public class MyAlert {
     public void showMsg(String msg) {
         this.alert.setContentText(msg);
         this.alert.showAndWait();
+    }
+    
+    public Optional<ButtonType> showMsg(String msg, Alert.AlertType type) {
+        this.alert.setAlertType(type);
+        this.alert.setContentText(msg);
+        return this.alert.showAndWait();
     }
 }
