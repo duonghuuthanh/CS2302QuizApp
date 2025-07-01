@@ -49,6 +49,8 @@ public class PracticeController implements Initializable {
         try {
             int num = Integer.parseInt(this.txtNum.getText());
             questions = Configs.questionService.getQuestions(num);
+            
+            this.currentIndex = 0;
             loadQuestion();
         } catch (InputMismatchException ex) {
             MyAlert.getInstance().showMsg("Số câu không hợp lệ!", Alert.AlertType.WARNING);
