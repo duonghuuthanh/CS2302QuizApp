@@ -12,7 +12,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-
 <ScrollPane stylesheets="@styles.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dht.quizapp.QuestionsController">
    <content>
       <VBox styleClass="Main">
@@ -47,7 +46,13 @@
             </VBox>
             <Button mnemonicParsing="false" onAction="#handleMoreChoice" styleClass="Button" text="Thêm lựa chọn" />
             <Button mnemonicParsing="false" onAction="#handleQuestion" style="-fx-background-color: red;" styleClass="Button" text="Thêm câu hỏi" />
-            <TextField fx:id="txtSearch" promptText="Tìm kiếm..." styleClass="Input" />
+            <HBox styleClass="Main">
+               <children>
+                  <TextField fx:id="txtSearch" promptText="Tìm kiếm..." styleClass="Input" />
+                  <ComboBox fx:id="cbSearchCates" prefWidth="150.0" styleClass="Input" />
+                  <ComboBox fx:id="cbSearchLevels" layoutX="328.0" layoutY="20.0" prefWidth="150.0" styleClass="Input" />
+               </children>
+            </HBox>
             <TableView fx:id="tbQuestions" prefHeight="162.0" prefWidth="580.0" />
          </children>
       </VBox>

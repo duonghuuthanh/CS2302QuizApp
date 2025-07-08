@@ -18,20 +18,15 @@ import java.util.List;
  *
  * @author admin
  */
-public class CategoryServices extends BaseServices<Category> {
-    @Override
-    public PreparedStatement getStm(Connection conn) throws SQLException {
-        return conn.prepareCall("SELECT * FROM category");
-    }
+public abstract class BaseServices<T> {
+    public abstract PreparedStatement getStm(Connection conn) throws SQLException;
+    public abstract List<T> getResults(ResultSet rs) throws SQLException;
+    
+    public List<T> list() throws SQLException {
+        Connection conn = JdbcConnector.getInstance().connect();
 
-    @Override
-    public List<Category> getResults(ResultSet rs) throws SQLException {
-        List<Category> cates = new ArrayList<>();
-        while (rs.next()) {
-            Category c = new Category(rs.getInt("id"), rs.getString("name"));
-            cates.add(c);
-        }
-        
-        return cates;
+        PreparedStatement stm = this.getStm(conn);
+
+        return this.getResults(stm.executeQuery());
     }
 }

@@ -4,18 +4,27 @@
  */
 package com.dht.quizapp;
 
+import com.dht.pojo.Category;
+import com.dht.pojo.Level;
 import com.dht.pojo.Question;
+import com.dht.services.FlyweightFactory;
+import com.dht.services.question.BaseQuestionServices;
+import com.dht.services.question.CategoryQuestionServicesDecorator;
+import com.dht.services.question.LevelQuestionServicesDecorator;
+import com.dht.services.question.LimitQuestionServicesDecorator;
 import com.dht.utils.Configs;
 import com.dht.utils.MyAlert;
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.InputMismatchException;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Logger;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
@@ -38,6 +47,11 @@ public class PracticeController implements Initializable {
     private VBox vboxChoices;
     @FXML
     private Text txtResult;
+    @FXML
+    ComboBox<Category> cbCates;
+    @FXML
+    ComboBox<Level> cbLevels;
+
     private List<Question> questions;
     private int currentIndex = 0;
 
@@ -49,38 +63,68 @@ public class PracticeController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+
+        try {
+            this.cbCates.setItems(FXCollections.observableList(FlyweightFactory.getData(Configs.cateService, "categories")));
+            this.cbLevels.setItems(FXCollections.observableList(FlyweightFactory.getData(Configs.levelService, "levels")));
+        } catch (SQLException ex) {
+            Logger.getLogger(PracticeController.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+
     }
 
     public void start(ActionEvent event) throws SQLException {
+        if (this.txtNum.getText() == null || this.txtNum.getText().isEmpty()) {
+            MyAlert.getInstance().showMsg("Vui lòng nhập số câu hỏi!", Alert.AlertType.ERROR);
+            return;
+        }
         try {
             int num = Integer.parseInt(this.txtNum.getText());
-            questions = Configs.questionService.getQuestions(num);
 
-            this.currentIndex = 0;
-            loadQuestion();
-        } catch (InputMismatchException ex) {
+            BaseQuestionServices s = Configs.questionService;
+            Category c = this.cbCates.getSelectionModel().getSelectedItem();
+            if (c != null) {
+                s = new CategoryQuestionServicesDecorator(s, c);
+            }
+
+            Level lvl = this.cbLevels.getSelectionModel().getSelectedItem();
+            if (lvl != null) {
+                s = new LevelQuestionServicesDecorator(s, lvl);
+            }
+
+            s = new LimitQuestionServicesDecorator(s, num);
+            questions = s.list();
+
+            if (!questions.isEmpty()) {
+                this.currentIndex = 0;
+                loadQuestion();
+            } else {
+                MyAlert.getInstance().showMsg("Không có câu hỏi phù hợp!", Alert.AlertType.WARNING);
+            }
+        } catch (NumberFormatException ex) {
             MyAlert.getInstance().showMsg("Số câu không hợp lệ!", Alert.AlertType.WARNING);
         }
     }
 
     public void check(ActionEvent event) {
-        this.txtResult.getStyleClass().clear();
+        if (this.currentIndex >= 0) {
+            this.txtResult.getStyleClass().clear();
 
-        Question q = this.questions.get(this.currentIndex);
-        for (int i = 0; i < q.getChoices().size(); i++) {
-            if (q.getChoices().get(i).isCorrect()) {
-                HBox h = (HBox) vboxChoices.getChildren().get(i);
-                h.getStyleClass().add("Space");
-                if (((RadioButton) h.getChildren().get(0)).isSelected()) {
-                    this.txtResult.setText("Congratulation, exactly!");
-                    this.txtResult.getStyleClass().add("Correct");
-                } else {
-                    this.txtResult.setText("So sorry, wrongly!");
-                    this.txtResult.getStyleClass().add("Wrong");
+            Question q = this.questions.get(this.currentIndex);
+            for (int i = 0; i < q.getChoices().size(); i++) {
+                if (q.getChoices().get(i).isCorrect()) {
+                    HBox h = (HBox) vboxChoices.getChildren().get(i);
+                    h.getStyleClass().add("Space");
+                    if (((RadioButton) h.getChildren().get(0)).isSelected()) {
+                        this.txtResult.setText("Congratulation, exactly!");
+                        this.txtResult.getStyleClass().add("Correct");
+                    } else {
+                        this.txtResult.setText("So sorry, wrongly!");
+                        this.txtResult.getStyleClass().add("Wrong");
+                    }
+
+                    break;
                 }
-
-                break;
             }
         }
     }
