@@ -14,7 +14,7 @@ import java.util.Map;
  * @author admin
  */
 public class FlyweightFactory {
-    private static Map<String, List> cachedData = new HashMap<>();
+    private static final Map<String, List> cachedData = new HashMap<>();
     
     public static <T> List<T> getData(BaseServices s, String key) throws SQLException {
         if (cachedData.containsKey(key))
